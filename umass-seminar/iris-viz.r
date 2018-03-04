@@ -11,8 +11,10 @@ data(iris)
 mc <- combn(names(iris)[1:4], 2)
 
 iris_plot <- function(x) {
-  figure(xlab=x$xlab[1], ylab=x$ylab[1]) %>% 
-    ly_points(x='x', y='y', color='Species', data=x)
+  ggplot(x, aes(x=x, y=y, group=Species, color=Species)) + geom_point() + 
+    xlab(x$xlab[1]) + ylab(x$ylab[1])
+#  figure(xlab=x$xlab[1], ylab=x$ylab[1]) %>% 
+#    ly_points(x='x', y='y', color='Species', data=x)
 }
 
 iris_comb <- foreach(j=1:ncol(mc), .combine=rbind) %do% {
